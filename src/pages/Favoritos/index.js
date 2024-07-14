@@ -2,8 +2,10 @@ import Banner from 'components/Banner';
 import styles from './Favorito.module.css'
 import Titulo from 'components/Titulo';
 import Card from 'components/Card';
+import { useFavoritoContext } from 'contextos/Favoritos';
 
 function Favoritos() {
+    const { favorito } = useFavoritoContext();
     return (
         <>
         <Banner imagem='favoritos' />
@@ -11,7 +13,9 @@ function Favoritos() {
             <h1>Meus Favoritos</h1>
         </Titulo>
         <section className={styles.container}>
-            <Card id='1' titulo='Gato' capa='https://thecatapi.com/api/images/get?format=src&type=png' />
+            {favorito.map((fav) => {
+                return <Card {...fav} key={fav.id} />
+            })}
         </section>
         </>
     )
